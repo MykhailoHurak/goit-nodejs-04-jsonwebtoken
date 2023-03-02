@@ -9,10 +9,15 @@ const bookSchema = new Schema({
         type: String,
         required: [true, 'Set Author for book'],
     },
-     favorite: {
+    favorite: {
         type: Boolean,
         default: false,
     },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "authusers",
+        required: true,
+     }
 }, {versionKey: false, timestamps: true})
 
 const BookModel = model("book", bookSchema)

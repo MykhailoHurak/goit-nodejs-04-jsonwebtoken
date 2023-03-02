@@ -1,7 +1,8 @@
 const BookModel = require("../../models/book")
 
 const getAllBooks = async (req, res) => { 
-        const result = await BookModel.find()
+        const { _id: owner } = req.user
+        const result = await BookModel.find({owner})
         res.json(result)
 }
 

@@ -1,21 +1,21 @@
 const express = require('express')
 
-const { isValidId } = require("../../middlewares")
+const { isValidId, authenticate } = require("../../middlewares")
 const { ctrlWrapper } = require("../../helpers")
 const { getAllBooks, getBookById, addBook, removeBook, updateBook, updateBookFavorite } = require("../../controllers/books")
 
 const router = express.Router()
 
-router.get('/', ctrlWrapper(getAllBooks))
+router.get('/', authenticate, ctrlWrapper(getAllBooks))
 
-router.get('/:id', ctrlWrapper(getBookById))
+router.get('/:id', authenticate, isValidId, ctrlWrapper(getBookById))
 
-router.post('/', ctrlWrapper(addBook))
+router.post('/', authenticate, ctrlWrapper(addBook))
 
-router.delete('/:id', isValidId,  ctrlWrapper(removeBook))
+router.delete('/:id', authenticate, isValidId,  ctrlWrapper(removeBook))
 
-router.put('/:id', isValidId, ctrlWrapper(updateBook))
+router.put('/:id', authenticate, isValidId, ctrlWrapper(updateBook))
 
-router.patch('/:id/favorite', isValidId, ctrlWrapper(updateBookFavorite))
+router.patch('/:id/favorite', authenticate, isValidId, ctrlWrapper(updateBookFavorite))
 
 module.exports = router
