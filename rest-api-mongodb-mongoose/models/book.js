@@ -15,9 +15,9 @@ const bookSchema = new Schema({
     },
     owner: {
         type: Schema.Types.ObjectId,
-        ref: "authusers",
+        ref: "authuser",
         required: true,
-     }
+    }
 }, {versionKey: false, timestamps: true})
 
 const BookModel = model("book", bookSchema)
